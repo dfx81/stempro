@@ -1,6 +1,7 @@
 extends Node
 
 var PATH = "user://data.save"
+var DEBUG = false
 
 var bio_questions : Array = [
 	#["TUTORIAL MODE", "TUTORIAL MODE"],
@@ -55,7 +56,7 @@ var cs_questions : Array = [
 	["The result obtained from a program.", "OUTPUT"],
 	["Problem analysis is a process of ___ a problem into a solution.", "TRANSFORMING"],
 	["___ are continuous block of memory that can be used to store data.", "ARRAYS"],
-	["Arrays are ___ block of memory that can be used to store data.", "CONTINUOUS"],
+	["Arrays are ___ blocks of memory that can be used to store data.", "CONTINUOUS"],
 	["___ are used to store data.", "VARIABLES"],
 	["Text are represented as a ___ type.", "STRING"],
 	["A ___ consists of 8 bits.", "BYTE"],
@@ -68,12 +69,12 @@ var cs_questions : Array = [
 	["start:\n\tx = 1\n\ty = 1\n\toutput x + y\nend", "2", "1", "3", "4"],
 	["start:\n\tx = 1\n\ty = 0\n\toutput x / y\nend", "Error", "1", "2", "3"],
 	["start:\n\tx = 1\n\ty = 2\n\tx = x + y\n\ty = x\nend", "x=3, y=3", "x=1, y=3", "x=3, y=1", "x=1, y=1"],
-	["start:\n\tx = 0\n\tif x == 0:\n\t\toutput \"x is 0\"\n\telse:\n\t\toutput \"x is not 0\"\n\tendif\nend", "x is 0", "x is not 0"],
-	["start:\n\tage = 18\n\tif age >= 18:\n\t\toutput \"You can vote.\"\n\telse:\n\t\toutput \"You cannot vote.\"\n\tendif\nend", "You can vote.", "You cannot vote."],
-	["start:\n\tmark = 75\n\tif grade >= 90:\n\t\toutput \"A+\"\n\telif grade >= 80:\n\t\toutput \"A\"\n\telif grade >= 70:\n\t\toutput \"B\"\n\telse:\n\t\toutput \"Lower than B.\"\n\tendif\nend", "B", "A+", "A", "Lower than B."],
-	["start:\n\tx = 0\n\ti = 0\n\twhile i < 5:\n\t\tx = x + i\n\t\ti = i + 1\n\tendwhile\n\toutput x\nend", "10", "5", "3", "7"],
-	["start:\n\tx = 0\n\ti = 0\n\twhile i < 10:\n\t\tx = x + 1\n\t\ti = i + 2\n\tendwhile\n\toutput x\nend", "5", "1", "7", "10"],
-	["start:\n\tx = 0\n\ti = 0\n\twhile i < 5:\n\t\tif i == 1:\n\t\t\tx = 1\n\t\tendif\n\t\ti = i + 1\n\tendwhile\n\toutput x\nend", "1", "2", "3", "4"],
+	["start:\n\tx = 0\n\tif x == 0\n\t\toutput \"x is 0\"\n\telse\n\t\toutput \"x is not 0\"\n\tendif\nend", "x is 0", "x is not 0"],
+	["start:\n\tage = 18\n\tif age >= 18\n\t\toutput \"You can vote.\"\n\telse\n\t\toutput \"You cannot vote.\"\n\tendif\nend", "You can vote.", "You cannot vote."],
+	["start:\n\tmark = 75\n\tif mark >= 90\n\t\toutput \"A+\"\n\telse if mark >= 80\n\t\toutput \"A\"\n\telse if mark >= 70\n\t\toutput \"B\"\n\telse\n\t\toutput \"Lower than B.\"\n\tendif\nend", "B", "A+", "A", "Lower than B."],
+	["start:\n\tx = 0\n\ti = 0\n\twhile i < 5\n\t\tx = x + i\n\t\ti = i + 1\n\tendwhile\n\toutput x\nend", "10", "5", "3", "7"],
+	["start:\n\tx = 0\n\ti = 0\n\twhile i < 10\n\t\tx = x + 1\n\t\ti = i + 2\n\tendwhile\n\toutput x\nend", "5", "1", "7", "10"],
+	["start:\n\tx = 0\n\ti = 0\n\twhile i < 5\n\t\tif i == 1\n\t\t\tx = 1\n\t\tendif\n\t\ti = i + 1\n\tendwhile\n\toutput x\nend", "1", "2", "3", "4"],
 ]
 
 var mode = 0
@@ -81,13 +82,14 @@ var mode = 0
 var cur_question: int = 0
 var questions : Array = bio_questions
 var lvl_list = []
-var progress = [0, 0, 0]
+var progress = [0, 0, 0, 0]
+var cur_seed = 0
 
 func _ready():
 	load_score()
 	save_score()
 
-func instance_next_lvl():
+func congrats_msg():
 	pass
 
 func save_score():
@@ -97,6 +99,8 @@ func save_score():
 	file.store_8(progress[0])
 	file.store_8(progress[1])
 	file.store_8(progress[2])
+	file.store_8(progress[3])
+	file.store_8(cur_seed)
 	
 	file.close()
 	
@@ -110,5 +114,7 @@ func load_score():
 		progress[0] = file.get_8()
 		progress[1] = file.get_8()
 		progress[2] = file.get_8()
+		progress[3] = file.get_8()
+		cur_seed = file.get_8()
 	
 	file.close()

@@ -16,7 +16,7 @@ onready var results : Control = $Results
 
 func _ready():
 	cur_question = Globals.cur_question
-	if cur_question == 0:
+	if cur_question == 0 and Globals.mode != 3:
 		$Tutorial.visible = true
 	var question : String = Globals.questions[cur_question][0]
 	if question.begins_with("res://"):
@@ -135,9 +135,10 @@ func _on_Enter_Button_pressed():
 		guesses_text.text = "You took " + str(guesses) + " tries."
 		results.visible = true
 		if Globals.progress[Globals.mode] <= Globals.cur_question:
-			Globals.progress[Globals.mode] += 1
+			Globals.progress[Globals.mode] = Globals.cur_question + 1
 		
-		Globals.save_score()
+		if not Globals.DEBUG:
+			Globals.save_score()
 	else:
 		$wrong.play()
 		user_answer = ""
@@ -150,6 +151,7 @@ func _on_Restart_pressed():
 	Globals.cur_question += 1
 	
 	if Globals.cur_question >= len(Globals.lvl_list):
+		get_parent().show_congrats_msg()
 		queue_free()
 	else:
 		emit_signal("next_level", Globals.lvl_list[Globals.cur_question])
@@ -157,8 +159,9 @@ func _on_Restart_pressed():
 
 func _on_Menu_pressed():
 	get_parent_control().get_node("click").play()
+	if Globals.cur_question + 1 >= len(Globals.lvl_list):
+		get_parent().show_congrats_msg()
 	queue_free()
-
 
 func _on_Button_pressed():
 	$Tutorial.visible = false

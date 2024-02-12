@@ -38,9 +38,10 @@ func _on_answer_btn_pressed(id: int):
 		guesses_label.text = "You took " + str(guesses) + " tries."
 		
 		if Globals.progress[Globals.mode] <= Globals.cur_question:
-			Globals.progress[Globals.mode] += 1
+			Globals.progress[Globals.mode] = Globals.cur_question + 1
 		
-		Globals.save_score()
+		if not Globals.DEBUG:
+			Globals.save_score()
 	else:
 		$wrong.play()
 		choices_cont.get_child(id).theme = wrong_theme
@@ -51,6 +52,9 @@ signal next_level
 
 
 func _on_Menu_pressed():
+	get_parent_control().get_node("click").play()
+	if Globals.cur_question + 1 >= len(Globals.lvl_list):
+		get_parent().show_congrats_msg()
 	queue_free()
 
 
@@ -59,6 +63,7 @@ func _on_Restart_pressed():
 	Globals.cur_question += 1
 	
 	if Globals.cur_question >= len(Globals.lvl_list):
+		get_parent().show_congrats_msg()
 		queue_free()
 	else:
 		emit_signal("next_level", Globals.lvl_list[Globals.cur_question])
