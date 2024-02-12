@@ -1,0 +1,312 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/themes/kenneyUI.tres" type="Theme" id=1]
+[ext_resource path="res://assets/themes/kenneyUI-blue.tres" type="Theme" id=2]
+[ext_resource path="res://assets/themes/kenneyUI-green.tres" type="Theme" id=3]
+[ext_resource path="res://assets/sfx/error_003.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/sfx/confirmation_002.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/fonts/JetBrainsMono-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/sfx/select_004.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/fonts/Lato-Light.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://scripts/MultipleChoice.gd" type="Script" id=9]
+[ext_resource path="res://assets/fonts/Lato-Bold.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://assets/fonts/Lato-Thin.ttf" type="DynamicFontData" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 48
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 128
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 64
+outline_size = 1
+use_filter = true
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 64
+outline_size = 2
+font_data = ExtResource( 11 )
+
+[sub_resource type="StreamTexture" id=16]
+load_path = "res://.import/vector_whiteIcons.svg-780eddd9aeed66930d515e04d274aa33.stex"
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = SubResource( 16 )
+region = Rect2( 152, 202, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = SubResource( 16 )
+region = Rect2( 155, 151, 32, 32 )
+
+[node name="MultipleChoice" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 9 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.788235, 0.835294, 0.913725, 1 )
+
+[node name="Container" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -540.0
+margin_top = -960.0
+margin_right = 540.0
+margin_bottom = 960.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="Container"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1048.0
+margin_bottom = 1888.0
+
+[node name="Question" type="MarginContainer" parent="Container/Panel"]
+anchor_right = 1.0
+margin_bottom = 1154.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/margin_right = 64
+custom_constants/margin_top = 64
+custom_constants/margin_left = 64
+custom_constants/margin_bottom = 64
+
+[node name="Container" type="VBoxContainer" parent="Container/Panel/Question"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 952.0
+margin_bottom = 1090.0
+custom_constants/separation = 32
+
+[node name="Label" type="Label" parent="Container/Panel/Question/Container"]
+margin_right = 888.0
+margin_bottom = 78.0
+custom_colors/font_color = Color( 0.4, 0.423529, 0.462745, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "What is the output?"
+valign = 1
+
+[node name="Question Label" type="RichTextLabel" parent="Container/Panel/Question/Container"]
+margin_top = 275.0
+margin_right = 888.0
+margin_bottom = 860.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_colors/selection_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/mono_font = SubResource( 4 )
+custom_fonts/bold_italics_font = SubResource( 4 )
+custom_fonts/italics_font = SubResource( 4 )
+custom_fonts/bold_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 4 )
+text = "start:
+	x = 0
+	
+	if x == 0:
+		output \"A\"
+	else:
+		output \"B\"
+	endif
+end"
+fit_content_height = true
+
+[node name="AnswerButtons" type="MarginContainer" parent="Container/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -689.0
+margin_bottom = -1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="Choices" type="GridContainer" parent="Container/Panel/AnswerButtons"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 984.0
+margin_bottom = 656.0
+custom_constants/vseparation = 16
+custom_constants/hseparation = 16
+columns = 2
+
+[node name="A" type="Button" parent="Container/Panel/AnswerButtons/Choices"]
+visible = false
+margin_right = 468.0
+margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "A"
+clip_text = true
+
+[node name="B" type="Button" parent="Container/Panel/AnswerButtons/Choices"]
+visible = false
+margin_left = 484.0
+margin_right = 952.0
+margin_bottom = 304.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "B"
+clip_text = true
+
+[node name="C" type="Button" parent="Container/Panel/AnswerButtons/Choices"]
+visible = false
+margin_top = 320.0
+margin_right = 468.0
+margin_bottom = 624.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "C"
+clip_text = true
+
+[node name="D" type="Button" parent="Container/Panel/AnswerButtons/Choices"]
+visible = false
+margin_left = 484.0
+margin_top = 320.0
+margin_right = 952.0
+margin_bottom = 624.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "D"
+clip_text = true
+
+[node name="Results" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.839216 )
+
+[node name="Margin" type="MarginContainer" parent="Results"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 128
+custom_constants/margin_top = 256
+custom_constants/margin_left = 128
+custom_constants/margin_bottom = 256
+
+[node name="Panel" type="Panel" parent="Results/Margin"]
+margin_left = 128.0
+margin_top = 256.0
+margin_right = 952.0
+margin_bottom = 1664.0
+theme = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Results/Margin/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -476.0
+margin_top = -418.0
+margin_right = 476.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 17 )
+text = "CORRECT ANSWER"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Guesses" type="Label" parent="Results/Margin/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -344.0
+margin_top = 83.0
+margin_right = 344.0
+margin_bottom = 161.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "You took N tries."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Restart" type="Button" parent="Results/Margin/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -220.5
+margin_top = 292.0
+margin_right = 220.5
+margin_bottom = 440.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 19 )
+text = "    Next Level"
+icon = SubResource( 20 )
+expand_icon = true
+
+[node name="Menu" type="Button" parent="Results/Margin/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -220.5
+margin_top = 466.0
+margin_right = 220.5
+margin_bottom = 614.0
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 19 )
+text = "  Main Menu"
+icon = SubResource( 21 )
+expand_icon = true
+
+[node name="correct" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="wrong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[connection signal="pressed" from="Container/Panel/AnswerButtons/Choices/A" to="." method="_on_answer_btn_pressed" binds= [ 0 ]]
+[connection signal="pressed" from="Container/Panel/AnswerButtons/Choices/B" to="." method="_on_answer_btn_pressed" binds= [ 1 ]]
+[connection signal="pressed" from="Container/Panel/AnswerButtons/Choices/C" to="." method="_on_answer_btn_pressed" binds= [ 2 ]]
+[connection signal="pressed" from="Container/Panel/AnswerButtons/Choices/D" to="." method="_on_answer_btn_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="Results/Margin/Panel/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Results/Margin/Panel/Menu" to="." method="_on_Menu_pressed"]

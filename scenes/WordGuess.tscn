@@ -1,0 +1,1621 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://assets/themes/kenneyUI.tres" type="Theme" id=1]
+[ext_resource path="res://assets/themes/kenneyUI-red.tres" type="Theme" id=2]
+[ext_resource path="res://assets/themes/kenneyUI-green.tres" type="Theme" id=3]
+[ext_resource path="res://assets/themes/kenneyUI-yellow.tres" type="Theme" id=4]
+[ext_resource path="res://assets/images/sperm.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/vector_whiteIcons.svg" type="Texture" id=6]
+[ext_resource path="res://scripts/WordGuessScript.gd" type="Script" id=7]
+[ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/fonts/Lato-Light.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://assets/fonts/Lato-Regular.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://assets/fonts/RubikMonoOne-Regular.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://assets/themes/kenneyUI-blue.tres" type="Theme" id=12]
+[ext_resource path="res://assets/fonts/Lato-Thin.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://assets/fonts/Lato-Bold.ttf" type="DynamicFontData" id=14]
+[ext_resource path="res://assets/sfx/click_001.ogg" type="AudioStream" id=15]
+[ext_resource path="res://assets/sfx/select_004.ogg" type="AudioStream" id=16]
+[ext_resource path="res://assets/sfx/error_003.ogg" type="AudioStream" id=17]
+[ext_resource path="res://assets/sfx/confirmation_002.ogg" type="AudioStream" id=18]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+use_filter = true
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+use_filter = true
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+use_filter = true
+font_data = ExtResource( 11 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 54, 103, 32, 29 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 96
+font_data = ExtResource( 11 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 6 )
+region = Rect2( 460, 153, 20, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 6 )
+region = Rect2( 104, 102, 32, 32 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 64
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 156, 105, 31, 28 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 54, 103, 32, 29 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 6 )
+region = Rect2( 53, 3, 34, 28 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 128
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 64
+outline_size = 1
+use_filter = true
+font_data = ExtResource( 13 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 64
+outline_size = 2
+font_data = ExtResource( 13 )
+
+[sub_resource type="StreamTexture" id=18]
+load_path = "res://.import/vector_whiteIcons.svg-780eddd9aeed66930d515e04d274aa33.stex"
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = SubResource( 18 )
+region = Rect2( 152, 202, 38, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = SubResource( 18 )
+region = Rect2( 155, 151, 32, 32 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 72
+font_data = ExtResource( 14 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 48
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 48
+font_data = ExtResource( 8 )
+
+[node name="Word Guess" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 7 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.788235, 0.835294, 0.913725, 1 )
+
+[node name="Container" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -540.0
+margin_top = -960.0
+margin_right = 540.0
+margin_bottom = 960.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="Panel" type="Panel" parent="Container"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 1048.0
+margin_bottom = 1888.0
+
+[node name="Question" type="MarginContainer" parent="Container/Panel"]
+anchor_right = 1.0
+margin_bottom = 946.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/margin_right = 64
+custom_constants/margin_top = 64
+custom_constants/margin_left = 64
+custom_constants/margin_bottom = 64
+
+[node name="Container" type="VBoxContainer" parent="Container/Panel/Question"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 952.0
+margin_bottom = 882.0
+custom_constants/separation = 32
+
+[node name="Label" type="Label" parent="Container/Panel/Question/Container"]
+margin_right = 888.0
+margin_bottom = 78.0
+custom_colors/font_color = Color( 0.4, 0.423529, 0.462745, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Question:"
+valign = 1
+
+[node name="Question Label" type="Label" parent="Container/Panel/Question/Container"]
+visible = false
+margin_top = 110.0
+margin_right = 888.0
+margin_bottom = 431.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_colors/font_color = Color( 0.239216, 0.317647, 0.454902, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Acrosome contains hydrolytic enzyme to help the sperm to penetrate the zona pellucida of the secondary oocyte."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Question Image" type="TextureRect" parent="Container/Panel/Question/Container"]
+margin_top = 110.0
+margin_right = 888.0
+margin_bottom = 818.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 5 )
+stretch_mode = 6
+
+[node name="Answer" type="MarginContainer" parent="Container/Panel"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -24.0
+margin_bottom = 269.0
+custom_constants/margin_right = 64
+custom_constants/margin_top = 16
+custom_constants/margin_left = 64
+custom_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="Container/Panel/Answer"]
+margin_left = 64.0
+margin_top = 16.0
+margin_right = 952.0
+margin_bottom = 277.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Container/Panel/Answer/Container"]
+margin_right = 888.0
+margin_bottom = 78.0
+custom_colors/font_color = Color( 0.396118, 0.420425, 0.460938, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Answer:"
+valign = 1
+
+[node name="Final Answer" type="Label" parent="Container/Panel/Answer/Container"]
+margin_top = 82.0
+margin_right = 888.0
+margin_bottom = 261.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_colors/font_color = Color( 0.207843, 0.729412, 0.952941, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "______ ________"
+align = 1
+valign = 1
+
+[node name="Answer Hint" type="MarginContainer" parent="Container/Panel"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 285.0
+margin_bottom = 436.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 0
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 0
+
+[node name="Container" type="HBoxContainer" parent="Container/Panel/Answer Hint"]
+margin_left = 32.0
+margin_right = 984.0
+margin_bottom = 151.0
+custom_constants/separation = 16
+
+[node name="Correct Panel" type="Panel" parent="Container/Panel/Answer Hint/Container"]
+margin_right = 306.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+
+[node name="Container" type="HBoxContainer" parent="Container/Panel/Answer Hint/Container/Correct Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Container/Panel/Answer Hint/Container/Correct Panel/Container"]
+margin_right = 140.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Container/Panel/Answer Hint/Container/Correct Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 108.0
+margin_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Container/Panel/Answer Hint/Container/Correct Panel/Container"]
+margin_left = 144.0
+margin_top = 15.0
+margin_right = 285.0
+margin_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="Inaccurate Panel" type="Panel" parent="Container/Panel/Answer Hint/Container"]
+margin_left = 322.0
+margin_right = 629.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 4 )
+
+[node name="Container" type="HBoxContainer" parent="Container/Panel/Answer Hint/Container/Inaccurate Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Container/Panel/Answer Hint/Container/Inaccurate Panel/Container"]
+margin_right = 141.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Container/Panel/Answer Hint/Container/Inaccurate Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 109.0
+margin_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Container/Panel/Answer Hint/Container/Inaccurate Panel/Container"]
+margin_left = 145.0
+margin_top = 15.0
+margin_right = 287.0
+margin_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="Wrong Panel" type="Panel" parent="Container/Panel/Answer Hint/Container"]
+margin_left = 645.0
+margin_right = 952.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+
+[node name="Container" type="HBoxContainer" parent="Container/Panel/Answer Hint/Container/Wrong Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Container/Panel/Answer Hint/Container/Wrong Panel/Container"]
+margin_right = 142.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Container/Panel/Answer Hint/Container/Wrong Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 110.0
+margin_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Container/Panel/Answer Hint/Container/Wrong Panel/Container"]
+margin_left = 146.0
+margin_top = 15.0
+margin_right = 288.0
+margin_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="Keyboard" type="MarginContainer" parent="Container/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -497.0
+margin_bottom = -1.0
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="Container" type="VBoxContainer" parent="Container/Panel/Keyboard"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 984.0
+margin_bottom = 464.0
+custom_constants/separation = 8
+alignment = 1
+
+[node name="Keyboard Row 1" type="HBoxContainer" parent="Container/Panel/Keyboard/Container"]
+margin_right = 952.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 4
+alignment = 1
+
+[node name="Q Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_right = 91.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Q"
+
+[node name="W Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 95.0
+margin_right = 187.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "W"
+
+[node name="E Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 191.0
+margin_right = 282.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "E"
+
+[node name="R Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 286.0
+margin_right = 378.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "R"
+
+[node name="T Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 382.0
+margin_right = 473.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "T"
+
+[node name="Y Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 477.0
+margin_right = 569.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Y"
+
+[node name="U Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 573.0
+margin_right = 665.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "U"
+
+[node name="I Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 669.0
+margin_right = 760.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "I"
+
+[node name="O Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 764.0
+margin_right = 856.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "O"
+
+[node name="P Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 1"]
+margin_left = 860.0
+margin_right = 952.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "P"
+
+[node name="Keyboard Row 2" type="HBoxContainer" parent="Container/Panel/Keyboard/Container"]
+margin_top = 110.0
+margin_right = 952.0
+margin_bottom = 212.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 4
+alignment = 1
+
+[node name="A Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_right = 102.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "A"
+
+[node name="S Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_left = 106.0
+margin_right = 208.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "S"
+
+[node name="D Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_left = 212.0
+margin_right = 314.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "D"
+
+[node name="F Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_left = 318.0
+margin_right = 420.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "F"
+
+[node name="G Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_left = 424.0
+margin_right = 527.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "G"
+
+[node name="H Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_left = 531.0
+margin_right = 633.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "H"
+
+[node name="J Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_left = 637.0
+margin_right = 739.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "J"
+
+[node name="K Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_left = 743.0
+margin_right = 845.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "K"
+
+[node name="L Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 2"]
+margin_left = 849.0
+margin_right = 952.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "L"
+
+[node name="Keyboard Row 3" type="HBoxContainer" parent="Container/Panel/Keyboard/Container"]
+margin_top = 220.0
+margin_right = 952.0
+margin_bottom = 322.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 4
+alignment = 1
+
+[node name="Z Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 3"]
+margin_right = 132.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "Z"
+
+[node name="X Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 3"]
+margin_left = 136.0
+margin_right = 269.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "X"
+
+[node name="C Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 3"]
+margin_left = 273.0
+margin_right = 405.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "C"
+
+[node name="V Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 3"]
+margin_left = 409.0
+margin_right = 542.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "V"
+
+[node name="B Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 3"]
+margin_left = 546.0
+margin_right = 678.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "B"
+
+[node name="N Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 3"]
+margin_left = 682.0
+margin_right = 815.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "N"
+
+[node name="M Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 3"]
+margin_left = 819.0
+margin_right = 952.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 8 )
+text = "M"
+
+[node name="Keyboard Row 4" type="HBoxContainer" parent="Container/Panel/Keyboard/Container"]
+margin_top = 330.0
+margin_right = 952.0
+margin_bottom = 432.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 4
+alignment = 1
+
+[node name="Clear Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 4"]
+margin_right = 314.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 12 )
+custom_fonts/font = SubResource( 8 )
+icon = SubResource( 9 )
+icon_align = 1
+expand_icon = true
+
+[node name="Enter Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 4"]
+margin_left = 318.0
+margin_right = 633.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 12 )
+custom_fonts/font = SubResource( 8 )
+icon = SubResource( 10 )
+icon_align = 1
+expand_icon = true
+
+[node name="Backspace Button" type="Button" parent="Container/Panel/Keyboard/Container/Keyboard Row 4"]
+margin_left = 637.0
+margin_right = 952.0
+margin_bottom = 102.251
+grow_horizontal = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 12 )
+custom_fonts/font = SubResource( 8 )
+icon = SubResource( 11 )
+icon_align = 1
+expand_icon = true
+
+[node name="Results" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.839216 )
+
+[node name="Margin" type="MarginContainer" parent="Results"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 128
+custom_constants/margin_top = 256
+custom_constants/margin_left = 128
+custom_constants/margin_bottom = 256
+
+[node name="Panel" type="Panel" parent="Results/Margin"]
+margin_left = 128.0
+margin_top = 256.0
+margin_right = 952.0
+margin_bottom = 1664.0
+theme = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Results/Margin/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -476.0
+margin_top = -418.0
+margin_right = 476.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 12 )
+text = "CORRECT ANSWER"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Guesses" type="Label" parent="Results/Margin/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -344.0
+margin_top = 83.0
+margin_right = 344.0
+margin_bottom = 161.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 13 )
+text = "You took N tries."
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Restart" type="Button" parent="Results/Margin/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -220.5
+margin_top = 292.0
+margin_right = 220.5
+margin_bottom = 440.0
+theme = ExtResource( 12 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "    Next Level"
+icon = SubResource( 14 )
+expand_icon = true
+
+[node name="Menu" type="Button" parent="Results/Margin/Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -220.5
+margin_top = 466.0
+margin_right = 220.5
+margin_bottom = 614.0
+theme = ExtResource( 12 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "  Main Menu"
+icon = SubResource( 17 )
+expand_icon = true
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[node name="select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="correct" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+
+[node name="wrong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+
+[node name="Tutorial" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.862745 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Tutorial"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 1016.0
+margin_bottom = 1856.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial/ScrollContainer"]
+margin_right = 952.0
+margin_bottom = 2538.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 16
+custom_constants/margin_top = 64
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer"]
+margin_left = 16.0
+margin_top = 64.0
+margin_right = 936.0
+margin_bottom = 2474.0
+size_flags_horizontal = 3
+custom_constants/separation = 32
+alignment = 1
+
+[node name="Title" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_right = 908.0
+margin_bottom = 88.0
+custom_fonts/font = SubResource( 19 )
+text = "How to Play?"
+align = 1
+
+[node name="Guide 1" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 120.0
+margin_right = 908.0
+margin_bottom = 303.0
+custom_fonts/font = SubResource( 20 )
+text = "You'll be given a question and an input showing the number of letters in the answer."
+align = 1
+autowrap = true
+
+[node name="Sample" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 335.0
+margin_right = 908.0
+margin_bottom = 415.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.207843, 0.729412, 0.952941, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "________ ____"
+align = 1
+valign = 1
+
+[node name="Guide 2" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 447.0
+margin_right = 908.0
+margin_bottom = 506.0
+custom_fonts/font = SubResource( 20 )
+text = "Simply type in the answer for the question."
+align = 1
+autowrap = true
+
+[node name="Sample 2" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 538.0
+margin_right = 908.0
+margin_bottom = 618.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.207843, 0.729412, 0.952941, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "IMPERIAL ROAD"
+align = 1
+valign = 1
+
+[node name="Guide 3" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 650.0
+margin_right = 908.0
+margin_bottom = 771.0
+custom_fonts/font = SubResource( 20 )
+text = "If your answer is incorrect, a hint will be given as shown below."
+align = 1
+autowrap = true
+
+[node name="Sample 3" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 803.0
+margin_right = 908.0
+margin_bottom = 931.0
+custom_constants/separation = 16
+alignment = 1
+
+[node name="Correct Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3"]
+margin_right = 292.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 7
+size_flags_vertical = 0
+theme = ExtResource( 3 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Correct Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Correct Panel/Container"]
+margin_right = 133.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Correct Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 101.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Correct Panel/Container"]
+margin_left = 137.0
+margin_top = 4.0
+margin_right = 271.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "5"
+align = 2
+valign = 1
+
+[node name="Inaccurate Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3"]
+margin_left = 308.0
+margin_right = 600.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 7
+theme = ExtResource( 4 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Inaccurate Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Inaccurate Panel/Container"]
+margin_right = 134.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Inaccurate Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 102.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Inaccurate Panel/Container"]
+margin_left = 138.0
+margin_top = 4.0
+margin_right = 272.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "3"
+align = 2
+valign = 1
+
+[node name="Wrong Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3"]
+margin_left = 616.0
+margin_right = 908.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 7
+size_flags_vertical = 0
+theme = ExtResource( 2 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Wrong Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Wrong Panel/Container"]
+margin_right = 134.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Wrong Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 102.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 3/Wrong Panel/Container"]
+margin_left = 138.0
+margin_top = 4.0
+margin_right = 273.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "4"
+align = 2
+valign = 1
+
+[node name="Guide 4" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 963.0
+margin_right = 908.0
+margin_bottom = 1084.0
+custom_fonts/font = SubResource( 20 )
+text = "The hint below shows that there is 5 correct letters in the correct positions."
+align = 1
+autowrap = true
+
+[node name="Correct Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_left = 326.0
+margin_top = 1116.0
+margin_right = 582.0
+margin_bottom = 1244.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource( 3 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Correct Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Correct Panel/Container"]
+margin_right = 115.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Correct Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 83.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Correct Panel/Container"]
+margin_left = 119.0
+margin_top = 4.0
+margin_right = 235.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "5"
+align = 2
+valign = 1
+
+[node name="Guide 5" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 1276.0
+margin_right = 908.0
+margin_bottom = 1397.0
+custom_fonts/font = SubResource( 20 )
+text = "The hint below shows that there is 3 correct letters but in incorrect positions."
+align = 1
+autowrap = true
+
+[node name="Inaccurate Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_left = 326.0
+margin_top = 1429.0
+margin_right = 582.0
+margin_bottom = 1557.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 4
+theme = ExtResource( 4 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Inaccurate Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Inaccurate Panel/Container"]
+margin_right = 116.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Inaccurate Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 84.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Inaccurate Panel/Container"]
+margin_left = 120.0
+margin_top = 4.0
+margin_right = 236.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "3"
+align = 2
+valign = 1
+
+[node name="Guide 6" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 1589.0
+margin_right = 908.0
+margin_bottom = 1710.0
+custom_fonts/font = SubResource( 20 )
+text = "The hint below shows that there is 4 wrong letters."
+align = 1
+autowrap = true
+
+[node name="Wrong Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_left = 326.0
+margin_top = 1742.0
+margin_right = 582.0
+margin_bottom = 1870.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource( 2 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Wrong Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Wrong Panel/Container"]
+margin_right = 116.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Wrong Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 84.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Wrong Panel/Container"]
+margin_left = 120.0
+margin_top = 4.0
+margin_right = 237.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "4"
+align = 2
+valign = 1
+
+[node name="Guide 7" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 1902.0
+margin_right = 908.0
+margin_bottom = 2023.0
+custom_fonts/font = SubResource( 20 )
+text = "You'll complete the level if you answered the question correctly."
+align = 1
+autowrap = true
+
+[node name="Sample 4" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 2055.0
+margin_right = 908.0
+margin_bottom = 2135.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+custom_colors/font_color = Color( 0.207843, 0.729412, 0.952941, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "TUTORIAL MODE"
+align = 1
+valign = 1
+
+[node name="Sample 5" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_top = 2167.0
+margin_right = 908.0
+margin_bottom = 2295.0
+custom_constants/separation = 16
+alignment = 1
+
+[node name="Correct Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5"]
+margin_right = 292.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 7
+size_flags_vertical = 0
+theme = ExtResource( 3 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Correct Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Correct Panel/Container"]
+margin_right = 103.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Correct Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 71.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Correct Panel/Container"]
+margin_left = 107.0
+margin_top = 4.0
+margin_right = 271.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "12"
+align = 2
+valign = 1
+
+[node name="Inaccurate Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5"]
+margin_left = 308.0
+margin_right = 600.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 7
+theme = ExtResource( 4 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Inaccurate Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Inaccurate Panel/Container"]
+margin_right = 134.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Inaccurate Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 102.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Inaccurate Panel/Container"]
+margin_left = 138.0
+margin_top = 4.0
+margin_right = 272.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="Wrong Panel" type="Panel" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5"]
+margin_left = 616.0
+margin_right = 908.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 256, 128 )
+size_flags_horizontal = 7
+size_flags_vertical = 0
+theme = ExtResource( 2 )
+
+[node name="Container" type="HBoxContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Wrong Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_right = -10.0
+alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Wrong Panel/Container"]
+margin_right = 134.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_bottom = 32
+
+[node name="Icon" type="TextureRect" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Wrong Panel/Container/Margin"]
+margin_top = 32.0
+margin_right = 102.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+texture = SubResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Sample 5/Wrong Panel/Container"]
+margin_left = 138.0
+margin_top = 4.0
+margin_right = 273.0
+margin_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 5 )
+text = "0"
+align = 2
+valign = 1
+
+[node name="Button" type="Button" parent="Tutorial/ScrollContainer/MarginContainer/VBoxContainer"]
+margin_left = 282.0
+margin_top = 2327.0
+margin_right = 624.324
+margin_bottom = 2410.25
+size_flags_horizontal = 4
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "          Got it!          "
+
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/Q Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "Q" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/W Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "W" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/E Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "E" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/R Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "R" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/T Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "T" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/Y Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "Y" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/U Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "U" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/I Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "I" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/O Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "O" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 1/P Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "P" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/A Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "A" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/S Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "S" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/D Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "D" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/F Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "F" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/G Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "G" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/H Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "H" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/J Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "J" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/K Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "K" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 2/L Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "L" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 3/Z Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "Z" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 3/X Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "X" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 3/C Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "C" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 3/V Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "V" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 3/B Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "B" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 3/N Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "N" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 3/M Button" to="." method="_on_Keyboard_Button_pressed" binds= [ "M" ]]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 4/Clear Button" to="." method="_on_Clear_Button_pressed"]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 4/Enter Button" to="." method="_on_Enter_Button_pressed"]
+[connection signal="pressed" from="Container/Panel/Keyboard/Container/Keyboard Row 4/Backspace Button" to="." method="_on_Backspace_Button_pressed"]
+[connection signal="pressed" from="Results/Margin/Panel/Restart" to="." method="_on_Restart_pressed"]
+[connection signal="pressed" from="Results/Margin/Panel/Menu" to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="Tutorial/ScrollContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]
