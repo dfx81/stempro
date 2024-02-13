@@ -12,6 +12,7 @@ var cur_level = null
 
 func _ready():
 	var today = Time.get_datetime_dict_from_system()
+	print(today)
 	today.hour = 0
 	today.minute = 0
 	today.second = 0
@@ -24,7 +25,6 @@ func _ready():
 		Globals.save_score()
 	
 	print(str(cur_seed))
-	rand_seed(cur_seed)
 	#Globals.bio_questions.shuffle()
 	#Globals.phys_questions.shuffle()
 	#Globals.cs_questions.shuffle()
@@ -69,6 +69,7 @@ func _on_SubjectBtn_pressed(subject_id: int):
 		Globals.mode = 3
 		if Globals.DEBUG or Globals.progress[0] >= len(Globals.bio_questions) and Globals.progress[1] >= len(Globals.phys_questions) and Globals.progress[2] >= len(Globals.cs_questions):
 			Globals.questions = Globals.bio_questions + Globals.phys_questions + Globals.cs_questions
+			seed(Globals.cur_seed)
 			Globals.questions.shuffle()
 			Globals.questions = Globals.questions.slice(0, 9)
 			subject_lbl.text = "DAILY SHUFFLE"
