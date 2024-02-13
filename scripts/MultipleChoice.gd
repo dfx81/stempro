@@ -55,12 +55,16 @@ func _on_Menu_pressed():
 	get_parent_control().get_node("click").play()
 	if Globals.cur_question + 1 >= len(Globals.lvl_list):
 		get_parent().show_congrats_msg()
+	print(Globals.progress)
 	queue_free()
 
 
 func _on_Restart_pressed():
 	$select.play()
 	Globals.cur_question += 1
+	
+	
+	print(Globals.progress)
 	
 	if Globals.cur_question >= len(Globals.lvl_list):
 		get_parent().show_congrats_msg()

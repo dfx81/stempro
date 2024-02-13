@@ -100,7 +100,9 @@ func save_score():
 	file.store_8(progress[1])
 	file.store_8(progress[2])
 	file.store_8(progress[3])
-	file.store_8(cur_seed)
+	file.store_64(cur_seed)
+	
+	print("SAVED SEED:" + str(cur_seed))
 	
 	file.close()
 	
@@ -115,6 +117,7 @@ func load_score():
 		progress[1] = file.get_8()
 		progress[2] = file.get_8()
 		progress[3] = file.get_8()
-		cur_seed = file.get_8()
+		cur_seed = file.get_64()
+		print("LOADED SEED:" + str(cur_seed))
 	
 	file.close()

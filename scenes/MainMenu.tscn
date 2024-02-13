@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/themes/kenneyUI.tres" type="Theme" id=1]
 [ext_resource path="res://assets/shaders/scroll_bg.tres" type="Shader" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/sfx/select_004.ogg" type="AudioStream" id=13]
 [ext_resource path="res://assets/bgm/Puzzle-Dreams-2.mp3" type="AudioStream" id=14]
 [ext_resource path="res://assets/fonts/Lato-Thin.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://assets/themes/kenneyUI-yellow.tres" type="Theme" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -239,7 +240,8 @@ margin_right = 760.0
 margin_bottom = 701.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+theme = ExtResource( 16 )
+custom_colors/font_color = Color( 0.380392, 0.380392, 0.380392, 1 )
 custom_fonts/font = SubResource( 10 )
 text = "Locked"
 
