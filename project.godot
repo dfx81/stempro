@@ -24,6 +24,7 @@ Globals="*res://scripts/Globals.gd"
 
 window/size/width=1080
 window/size/height=1920
+window/size/fullscreen=true
 window/size/test_width=540
 window/size/test_height=960
 window/handheld/orientation="portrait"
@@ -43,6 +44,7 @@ texture={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
 
 [physics]
 
