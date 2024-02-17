@@ -11,6 +11,8 @@ var lvl_list : Array = []
 var cur_level = null
 
 func _ready():
+	$Animation.play("HideSplash")
+	$Loading.set_as_toplevel(true)
 	var today = Time.get_datetime_dict_from_system()
 	print(today)
 	today.hour = 0
@@ -104,6 +106,8 @@ func _on_BackBtn_pressed():
 	level_select.visible = false
 
 func _on_StageBtn_pressed(stage_id: int):
+	$Animation.play("ShowLoading")
+	yield($Animation, "animation_finished")
 	if is_instance_valid(cur_level):
 		cur_level.queue_free()
 		

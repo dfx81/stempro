@@ -28,13 +28,15 @@ func _ready():
 	
 	for i in range(0, len(choices)):
 		choice_buttons[i].text = choices[i]
-
+	
+	get_parent_control().get_node("Animation").play("HideLoading")
+	
 func _on_answer_btn_pressed(id: int):
 	guesses += 1
 	if choices[id] == correct:
 		print("CORRECT")
 		$correct.play()
-		result_screen.visible = true
+		$Animation.play("ShowResults")
 		guesses_label.text = "You took " + str(guesses) + " tries."
 		
 		if Globals.progress[Globals.mode] <= Globals.cur_question:
@@ -56,11 +58,11 @@ func _on_Menu_pressed():
 	if Globals.cur_question + 1 >= len(Globals.lvl_list):
 		get_parent().show_congrats_msg()
 	print(Globals.progress)
+	get_parent_control().get_node("Animation").play("HideLoading")
 	queue_free()
 
 
 func _on_Restart_pressed():
-	$select.play()
 	Globals.cur_question += 1
 	
 	
@@ -69,5 +71,24 @@ func _on_Restart_pressed():
 	if Globals.cur_question >= len(Globals.lvl_list):
 		get_parent().show_congrats_msg()
 		queue_free()
+		get_parent_control().get_node("Animation").play("HideLoading")
 	else:
 		emit_signal("next_level", Globals.lvl_list[Globals.cur_question])
+
+func _on_Skip_pressed():
+	Globals.cur_question += 1
+	emit_signal("next_level", Globals.lvl_list[Globals.cur_question])
+
+
+func _on_Resume_pressed():
+	$Animation.play("HideMenu")
+	$select.play()
+
+
+func _on_Pause_pressed():
+	$Animation.play("ShowMenu")
+	
+	if Globals.cur_question + 1 > Globals.progress[Globals.mode]:
+		$Menu/Margin/Panel/Skip.disabled = true
+	
+	$select.play()
