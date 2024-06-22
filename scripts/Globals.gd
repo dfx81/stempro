@@ -3,6 +3,10 @@ extends Node
 var PATH = "user://data.save"
 var DEBUG = false
 
+var USERNAME: String = ""
+var PASSKEY: String = ""
+var SIGNATURE: String = ""
+
 var bio_questions : Array = [
 	#["TUTORIAL MODE", "TUTORIAL MODE"],
 	["res://assets/images/sperm-head.png", "HEAD"],
@@ -101,6 +105,9 @@ func save_score():
 	file.store_8(progress[2])
 	file.store_8(progress[3])
 	file.store_64(cur_seed)
+	file.store_pascal_string(USERNAME)
+	file.store_pascal_string(PASSKEY)
+	file.store_pascal_string(SIGNATURE)
 	
 	print("SAVED SEED:" + str(cur_seed))
 	
@@ -118,6 +125,9 @@ func load_score():
 		progress[2] = file.get_8()
 		progress[3] = file.get_8()
 		cur_seed = file.get_64()
+		USERNAME = file.get_pascal_string()
+		PASSKEY = file.get_pascal_string()
+		SIGNATURE = file.get_pascal_string()
 		print("LOADED SEED:" + str(cur_seed))
 	
 	file.close()

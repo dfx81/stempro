@@ -5,12 +5,31 @@ onready var level_select : Panel = $Container/VBoxContainer/Menu/MarginContainer
 onready var subject_lbl : Label = $Container/VBoxContainer/Menu/MarginContainer/LevelSelector/MarginContainer/VBoxContainer/Category
 onready var stage_list : GridContainer = $Container/VBoxContainer/Menu/MarginContainer/LevelSelector/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/StageList
 onready var stage_btn : PackedScene = preload("res://scenes/StageBtn.tscn")
+onready var rush_menu : Panel = $Container/VBoxContainer/Menu/MarginContainer/RushMode
+onready var leaderboard_cont : VBoxContainer = $Container/VBoxContainer/Menu/MarginContainer/RushMode/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Leaderboard
+onready var empty_score : CenterContainer = $Container/VBoxContainer/Menu/MarginContainer/RushMode/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Leaderboard/Empty
 var completed_theme : Theme = preload("res://assets/themes/kenneyUI-green.tres")
+var score_node : PackedScene = preload("res://scenes/LeaderboardScore.tscn")
 
 var lvl_list : Array = []
 var cur_level = null
+var online: bool = false
 
 func _ready():
+	$HTTPRequest.timeout = 10.0
+	$HTTPRequest.connect("request_completed", self, "_check_online")
+	
+	var err = $HTTPRequest.request("https://app-data.fly.dev/api/v2/tracker/com.kmk.stempro", [], true, HTTPClient.METHOD_POST)
+	yield($HTTPRequest, "request_completed")
+	
+	if not online:
+		return
+		
+	if not (Globals.USERNAME and Globals.PASSKEY):
+		
+		pass
+	
+	$bgm.play()
 	$Animation.play("HideSplash")
 	$Loading.set_as_toplevel(true)
 	var today = Time.get_datetime_dict_from_system()
@@ -31,6 +50,31 @@ func _ready():
 	#Globals.phys_questions.shuffle()
 	#Globals.cs_questions.shuffle()
 	pass
+	
+func _check_online(result, response_code, headers, body):
+	if response_code != 200:
+		$error.play()
+		$ConnectionError.visible = true
+	else:
+		online = true
+
+func _get_signature(result, response_code, headers, body):
+	if response_code == 200:
+		pass
+
+func _on_request_completed(result, res_code, headers, body):
+	if res_code == 200:
+		var data = JSON.parse(body.get_string_from_utf8())
+		
+		if data.result["scores"]:
+			var rank: int = 1
+			
+			for score in data.result["scores"]:
+				empty_score.visible = false
+				
+				var node = score_node.instance()
+				node.set_values(rank, score[0], score[1], score[3], Globals.SIGNATURE)
+				pass
 
 func _process(_delta):
 	refresh()
@@ -147,3 +191,22 @@ func _on_Ok_pressed():
 func _on_AlertOk_pressed():
 	$click.play()
 	$Alert.visible = false
+
+
+func _on_ReloadButton_pressed():
+	$click.play()
+	get_tree().reload_current_scene()
+
+
+func _on_RushBackBtn_pressed():
+	$click.play()
+	rush_menu.visible = false
+	subject_panel.visible = true
+	pass # Replace with function body.
+
+
+func _on_RushBtn_pressed():
+	$click.play()
+	rush_menu.visible = true
+	subject_panel.visible = false
+	pass # Replace with function body.
