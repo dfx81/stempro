@@ -119,7 +119,11 @@ func _on_request_completed(result, res_code, headers, body):
 		if data.result["scores"]:
 			can_submit = false
 			
+			var scores: int = 0
+			
 			for lb_score in data.result["scores"]:
+				scores += 1
+				
 				if Globals.SIGNATURE == lb_score[3] and score > lb_score[1]:
 					can_submit = true
 					better_personal_best = true
@@ -130,6 +134,9 @@ func _on_request_completed(result, res_code, headers, body):
 				elif score > lb_score[1]:
 					can_submit = true
 					break
+			
+			if scores < 5:
+				can_submit = true
 			
 			if can_submit:
 				$Submit.connect("request_completed", self, "_get_signature")
