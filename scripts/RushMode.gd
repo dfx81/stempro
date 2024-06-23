@@ -80,19 +80,19 @@ func _on_Keyboard_Button_pressed(key):
 		if not "_" in answer_text.text:
 			$correct.play()
 			started = false
-			$HTTPRequest.connect("request_completed", self, "_on_request_completed")
-			$HTTPRequest.request("https://app-data.fly.dev/api/v2/scores/com.kmk.stempro?limit=5")
-			yield($HTTPRequest, "request_completed")
-			
-			guesses_text.text = "SCORE: " + str(int(score)) + " pts"
-			
-			if can_submit:
-				guesses_text.text = guesses_text.text + " (NEW)"
 			
 			if Globals.cur_question < 4:
 				Globals.cur_question += 1
 				_ready()
 			else:
+				$HTTPRequest.connect("request_completed", self, "_on_request_completed")
+				$HTTPRequest.request("https://app-data.fly.dev/api/v2/scores/com.kmk.stempro?limit=5")
+				yield($HTTPRequest, "request_completed")
+			
+				guesses_text.text = "SCORE: " + str(int(score)) + " pts"
+			
+				if can_submit:
+					guesses_text.text = guesses_text.text + " (NEW)"
 				$Animation.play("ShowResults")
 	else:
 		var target: Node = find_node(key + " Button")
@@ -137,21 +137,23 @@ func _on_request_completed(result, res_code, headers, body):
 			
 			if scores < 5:
 				can_submit = true
+		else:
+			can_submit = true
 			
-			if can_submit:
-				$Submit.connect("request_completed", self, "_get_signature")
-				$Submit.request(
-					"https://app-data.fly.dev/api/v2/scores/com.kmk.stempro",
-					[
-						"Authorization: Basic " + Marshalls.utf8_to_base64(Globals.USERNAME + ":" + Globals.PASSKEY),
-						"Content-Type: application/json"
-					],
-					true,
-					HTTPClient.METHOD_POST,
-					JSON.print({"score": score})
-				)
-				yield($Submit, "request_completed")
-				emit_signal("refresh_score")
+		if can_submit:
+			$Submit.connect("request_completed", self, "_get_signature")
+			$Submit.request(
+				"https://app-data.fly.dev/api/v2/scores/com.kmk.stempro",
+				[
+					"Authorization: Basic " + Marshalls.utf8_to_base64(Globals.USERNAME + ":" + Globals.PASSKEY),
+					"Content-Type: application/json"
+				],
+				true,
+				HTTPClient.METHOD_POST,
+				JSON.print({"score": score})
+			)
+			yield($Submit, "request_completed")
+			emit_signal("refresh_score")
 
 func _on_Menu_pressed():
 	get_parent_control().get_node("click").play()
