@@ -17,6 +17,7 @@ var score_node : PackedScene = preload("res://scenes/LeaderboardScore.tscn")
 var lvl_list : Array = []
 var cur_level = null
 var online: bool = false
+var in_menu: bool = false
 
 func _ready():
 	$HTTPRequest.timeout = 10.0
@@ -30,8 +31,7 @@ func _ready():
 		
 	if Globals.USERNAME and Globals.PASSKEY:
 		_send_signature_request()
-	
-	yield($SigRequest, "request_completed")
+		yield($SigRequest, "request_completed")
 	
 	$bgm.play()
 	$Animation.play("HideSplash")
@@ -56,11 +56,14 @@ func _ready():
 	pass
 	
 func _check_online(result, response_code, headers, body):
+	print(response_code)
 	if response_code != 200:
 		$error.play()
 		$ConnectionError.visible = true
 	else:
 		online = true
+	
+	print(online)
 
 func _get_signature(result, response_code, headers, body):
 	if response_code == 200:
@@ -103,6 +106,7 @@ func refresh():
 func _on_PlayBtn_pressed():
 	subject_panel.visible = true
 	$click.play()
+	in_menu = true
 	$ChangeProfileBtn.visible = true
 
 func _on_SubjectBtn_pressed(subject_id: int):
@@ -269,6 +273,9 @@ func _on_SignInButton_pressed():
 		Globals.PASSKEY = passkey_input.text
 		
 		_send_signature_request()
+		
+		if in_menu:
+			$ChangeProfileBtn.visible = true
 
 func _send_signature_request():
 	$SigRequest.connect("request_completed", self, "_get_signature")
