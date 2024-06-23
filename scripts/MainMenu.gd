@@ -8,6 +8,9 @@ onready var stage_btn : PackedScene = preload("res://scenes/StageBtn.tscn")
 onready var rush_menu : Panel = $Container/VBoxContainer/Menu/MarginContainer/RushMode
 onready var leaderboard_cont : VBoxContainer = $Container/VBoxContainer/Menu/MarginContainer/RushMode/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Leaderboard
 onready var empty_score : CenterContainer = $Container/VBoxContainer/Menu/MarginContainer/RushMode/MarginContainer/VBoxContainer/ScrollContainer/MarginContainer/Leaderboard/Empty
+onready var username_input : LineEdit = $Container/VBoxContainer/Menu/MarginContainer/SignIn/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/UsernameInput
+onready var passkey_input : LineEdit = $Container/VBoxContainer/Menu/MarginContainer/SignIn/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/PasskeyInput
+onready var signin_panel : Panel = $Container/VBoxContainer/Menu/MarginContainer/SignIn
 var completed_theme : Theme = preload("res://assets/themes/kenneyUI-green.tres")
 var score_node : PackedScene = preload("res://scenes/LeaderboardScore.tscn")
 
@@ -25,9 +28,10 @@ func _ready():
 	if not online:
 		return
 		
-	if not (Globals.USERNAME and Globals.PASSKEY):
-		
-		pass
+	if Globals.USERNAME and Globals.PASSKEY:
+		_send_signature_request()
+	
+	yield($SigRequest, "request_completed")
 	
 	$bgm.play()
 	$Animation.play("HideSplash")
@@ -60,11 +64,15 @@ func _check_online(result, response_code, headers, body):
 
 func _get_signature(result, response_code, headers, body):
 	if response_code == 200:
-		pass
+		Globals.SIGNATURE = JSON.parse(body.get_string_from_utf8()).result["signature"]
+		print("SIGNATURE: " + Globals.SIGNATURE)
 
 func _on_request_completed(result, res_code, headers, body):
 	if res_code == 200:
 		var data = JSON.parse(body.get_string_from_utf8())
+		
+		for node in get_tree().get_nodes_in_group("scores"):
+			node.queue_free()
 		
 		if data.result["scores"]:
 			var rank: int = 1
@@ -73,8 +81,11 @@ func _on_request_completed(result, res_code, headers, body):
 				empty_score.visible = false
 				
 				var node = score_node.instance()
-				node.set_values(rank, score[0], score[1], score[3], Globals.SIGNATURE)
-				pass
+				node.set_values(rank, score[0], int(score[1]), score[3], Globals.SIGNATURE)
+				node.add_to_group("scores")
+				
+				leaderboard_cont.add_child(node)
+				rank += 1
 
 func _process(_delta):
 	refresh()
@@ -92,6 +103,7 @@ func refresh():
 func _on_PlayBtn_pressed():
 	subject_panel.visible = true
 	$click.play()
+	$ChangeProfileBtn.visible = true
 
 func _on_SubjectBtn_pressed(subject_id: int):
 	lvl_list.clear()
@@ -204,9 +216,88 @@ func _on_RushBackBtn_pressed():
 	subject_panel.visible = true
 	pass # Replace with function body.
 
-
 func _on_RushBtn_pressed():
 	$click.play()
+	
+	$HTTPRequest.connect("request_completed", self, "_on_request_completed")
+	$HTTPRequest.request("https://app-data.fly.dev/api/v2/scores/com.kmk.stempro?limit=5")
+	
+	yield($HTTPRequest, "request_completed")
+	
 	rush_menu.visible = true
 	subject_panel.visible = false
-	pass # Replace with function body.
+
+var allowed_username_char: String = "[a-zA-Z0-9]"
+
+func _on_UsernameInput_text_changed(new_text):
+	$click.play()
+	
+	var caret_pos = username_input.caret_position
+	var word = ''
+	var regex = RegEx.new()
+	
+	regex.compile(allowed_username_char)
+	
+	for valid_character in regex.search_all(new_text):
+		word += valid_character.get_string()
+		
+	username_input.text = word
+	username_input.caret_position = caret_pos - (len(new_text) - len(word))
+
+var allowed_passkey_char: String = "[a-zA-Z0-9]"
+
+func _on_PasskeyInput_text_changed(new_text):
+	$click.play()
+	
+	var caret_pos = passkey_input.caret_position
+	var word = ''
+	var regex = RegEx.new()
+	
+	regex.compile(allowed_passkey_char)
+	
+	for valid_character in regex.search_all(new_text):
+		word += valid_character.get_string()
+		
+	passkey_input.text = word
+	passkey_input.caret_position = caret_pos - (len(new_text) - len(word))
+
+func _on_SignInButton_pressed():
+	$click.play()
+	
+	if username_input.text and len(passkey_input.text) >= 6:
+		Globals.USERNAME = username_input.text
+		Globals.PASSKEY = passkey_input.text
+		
+		_send_signature_request()
+
+func _send_signature_request():
+	$SigRequest.connect("request_completed", self, "_get_signature")
+	$SigRequest.request("https://app-data.fly.dev/auth", ["Authorization: Basic " + Marshalls.utf8_to_base64(Globals.USERNAME + ":" + Globals.PASSKEY)])
+	yield($SigRequest, "request_completed")
+	
+	signin_panel.visible = false
+	Globals.save_score()
+	
+	if rush_menu.visible:
+		_on_RushBtn_pressed()
+
+func _on_ChangeProfileBtn_pressed():
+	signin_panel.visible = true
+	$ChangeProfileBtn.visible = false
+
+
+func _on_PlayButton_pressed():
+	Globals.generate_shuffle_mode_lvl_list()
+	$Animation.play("ShowLoading")
+	yield($Animation, "animation_finished")
+	if is_instance_valid(cur_level):
+		cur_level.queue_free()
+		
+	$click.play()
+	var game : PackedScene = preload("res://scenes/RushMode.tscn")
+	cur_level = game.instance()
+	
+	cur_level.connect("reload_level", self, "_on_PlayButton_pressed")
+	cur_level.connect("refresh_score", self, "_on_RushBtn_pressed")
+	
+	add_child(cur_level)

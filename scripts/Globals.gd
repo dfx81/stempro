@@ -89,6 +89,8 @@ var lvl_list = []
 var progress = [0, 0, 0, 0]
 var cur_seed = 0
 
+var tutorial_viewed: int = 0
+
 func _ready():
 	load_score()
 	save_score()
@@ -96,6 +98,18 @@ func _ready():
 func congrats_msg():
 	pass
 
+func generate_shuffle_mode_lvl_list():
+	questions = []
+	
+	for q in bio_questions + phys_questions + cs_questions:
+		if q[0].begins_with("start:"):
+			continue
+		else:
+			questions.append(q)
+	
+	randomize()
+	questions.shuffle()
+	
 func save_score():
 	var file = File.new()
 	
@@ -108,8 +122,10 @@ func save_score():
 	file.store_pascal_string(USERNAME)
 	file.store_pascal_string(PASSKEY)
 	file.store_pascal_string(SIGNATURE)
+	file.store_8(tutorial_viewed)
 	
 	print("SAVED SEED:" + str(cur_seed))
+	print("USERNAME:" + USERNAME)
 	
 	file.close()
 	
@@ -128,6 +144,9 @@ func load_score():
 		USERNAME = file.get_pascal_string()
 		PASSKEY = file.get_pascal_string()
 		SIGNATURE = file.get_pascal_string()
+		tutorial_viewed = file.get_8()
+		
 		print("LOADED SEED:" + str(cur_seed))
+		print("USERNAME:" + USERNAME)
 	
 	file.close()
