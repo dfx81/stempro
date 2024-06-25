@@ -33,6 +33,7 @@ func _ready():
 	
 	cur_question = Globals.cur_question
 	if Globals.tutorial_viewed == 0:
+		$Timer.paused = true
 		$Tutorial.visible = true
 	else:
 		started = true
@@ -135,7 +136,7 @@ func _on_request_completed(result, res_code, headers, body):
 					can_submit = true
 					break
 			
-			if scores < 5:
+			if scores < 5 and not has_dupe:
 				can_submit = true
 		else:
 			can_submit = true
@@ -170,6 +171,7 @@ func _on_Button_pressed():
 	Globals.tutorial_viewed = 1
 	Globals.save_score()
 	started = true
+	$Timer.paused = false
 
 func _on_Help_pressed():
 	$Tutorial.visible = true

@@ -1231,7 +1231,7 @@ anims/ShowResults = SubResource( 31 )
 [node name="Timer" type="Timer" parent="."]
 pause_mode = 1
 process_mode = 0
-wait_time = 300.0
+wait_time = 999.0
 one_shot = true
 autostart = true
 

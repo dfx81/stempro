@@ -302,6 +302,7 @@ func _on_PlayButton_pressed():
 		
 	$click.play()
 	var game : PackedScene = preload("res://scenes/RushMode.tscn")
+	Globals.cur_question = 0
 	cur_level = game.instance()
 	
 	cur_level.connect("reload_level", self, "_on_PlayButton_pressed")
