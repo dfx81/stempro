@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export(NodePath) var front_path: NodePath
 
+var end: PackedScene
 var front: Node2D
 var speed: int = 140
 var dir: Vector2 = Vector2(-1, 0)
@@ -10,6 +11,7 @@ var valid: Array = [false, false, false, false]
 var play: bool = false
 
 func _ready():
+	end = preload("res://assets/scenes/end.tscn")
 	play = true
 	front = get_node(front_path)
 
@@ -47,7 +49,15 @@ func _input(event):
 	elif event.is_action_pressed("move_right"):
 		buffer = Vector2(1, 0)
 	
-	
+func update_input(dir: int):
+	if dir == 0:
+		buffer = Vector2(0, -1)
+	elif dir == 2:
+		buffer = Vector2(0, 1)
+	elif dir == 3:
+		buffer = Vector2(-1, 0)
+	elif dir == 1:
+		buffer = Vector2(1, 0)
 
 func update_valid_dir(up: bool, right: bool, down: bool, left: bool):
 	valid = [up, right, down, left]
@@ -55,22 +65,20 @@ func update_valid_dir(up: bool, right: bool, down: bool, left: bool):
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("cats"):
-		Globals.reset_diff()
+		Globals.running = false
+		get_tree().get_nodes_in_group("game_manager")[0].play_lose_sound()
 		Globals.cur_question = Globals.cur_level
 		Globals.lives -= 1
 		
-		if Globals.lives < 0:
-			Globals.answer_pos = 0
-			Globals.cur_question = 0
-			Globals.lives = 3
-			Globals.persist = []
-			Globals.score = 0
-			Globals.stage = 1
+		if Globals.lives <= 0:
+			die()
+			yield(get_tree().create_timer(3, true), "timeout")
+			get_tree().change_scene_to(end)
+		else:
+			die()
 		
-		die()
-		
-		yield(get_tree().create_timer(3, true), "timeout")
-		get_tree().reload_current_scene()
+			yield(get_tree().create_timer(3, true), "timeout")
+			get_tree().reload_current_scene()
 
 func die():
 	play = false

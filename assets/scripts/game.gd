@@ -14,7 +14,7 @@ func _ready():
 	update_hint()
 	$CanvasLayer/ColorRect/Stage.bbcode_text = "[center]STAGE " + str(Globals.stage) + "[/center]"
 	$CanvasLayer/ColorRect/Question.bbcode_text = "[center]" + question[0] + "[/center]"
-	$CanvasLayer/ColorRect/Lives.bbcode_text = "[right]LIVES: X" + str(Globals.lives) + "[/right]"
+	$CanvasLayer/ColorRect/Lives.bbcode_text = "[right]LIVES X" + str(Globals.lives) + "[/right]"
 	$CanvasLayer/ColorRect/Answer.bbcode_text = "[center][wave amp=50 freq=10]" + Globals.answer + "[/wave][/center]"
 	get_tree().paused = true
 	letter_scene = preload("res://assets/scenes/letter.tscn")
@@ -49,9 +49,14 @@ func _ready():
 func start():
 	yield(get_tree().create_timer(3, true), "timeout")
 	get_tree().paused = false
+	$Chasing.play()
+	Globals.running = true
 
 func _process(delta):
-	$CanvasLayer/ColorRect/Score.bbcode_text = "SCORE: " + str(Globals.score).pad_zeros(7)
+	if Input.is_action_just_released("ui_cancel") and Globals.running:
+		get_tree().paused = not get_tree().paused
+	
+	$CanvasLayer/ColorRect/Score.bbcode_text = str(Globals.score).pad_zeros(7)
 	win = Globals.check_win()
 	
 	if last_ans_pos < Globals.answer_pos and not win:
@@ -59,12 +64,15 @@ func _process(delta):
 		update_hint()
 	
 	if win:
+		if Globals.running:
+			$Win.play()
+		Globals.running = false
 		Globals.stage += 1
 		Globals.persist = []
 		$CanvasLayer/ColorRect/Answer.visible = true
 		$CanvasLayer/ColorRect/Hint.visible = false
 		Globals.score += int(Globals.time)
-		$CanvasLayer/ColorRect/Score.bbcode_text = "SCORE: " + str(Globals.score).pad_zeros(7)
+		$CanvasLayer/ColorRect/Score.bbcode_text = str(Globals.score).pad_zeros(7)
 		get_tree().paused = true
 		Globals.answer_pos = 0
 		yield(get_tree().create_timer(3, true), "timeout")
@@ -79,7 +87,9 @@ func _process(delta):
 		
 		get_tree().reload_current_scene()
 	else:
-		Globals.time -= delta
+		if not get_tree().paused:
+			Globals.time -= delta
+			print(Globals.time)
 
 func update_hint():
 	hint = ""
@@ -92,3 +102,20 @@ func update_hint():
 		hint += "_" if Globals.answer[i] != ' ' else ' '
 	
 	$CanvasLayer/ColorRect/Hint.bbcode_text = "[center][shake rate=" + str(intensity + 10) + " level=" + str(intensity + 10) + " connected=0]" + hint + "[/shake][/center]"
+
+func _on_input_pressed(dir: int):
+	$CanvasLayer/ViewportContainer/Viewport/Node2D/level/player.update_input(dir)
+
+func play_collect_sound():
+	$Chasing.stop()
+	$Collect.play(0.1)
+	yield($Collect, "finished")
+	$Chasing.play()
+
+func play_lose_sound():
+	$Chasing.stop()
+	$Lose.play()
+
+func play_win_sound():
+	$Chasing.stop()
+	$Win.play()

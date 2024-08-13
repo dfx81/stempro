@@ -49,12 +49,13 @@ playing = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 5.0
-target_desired_distance = 5.0
+target_desired_distance = 10.0
 max_speed = 255.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
+visible = false
 scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 3 )

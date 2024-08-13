@@ -21,3 +21,4 @@ func _on_Area2D_body_entered(body: KinematicBody2D):
 			Globals.score += 10
 			get_parent().visible = false
 			get_parent().add_to_group("removed")
+			get_tree().get_nodes_in_group("game_manager")[0].play_collect_sound()

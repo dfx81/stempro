@@ -81,7 +81,6 @@ script = ExtResource( 1 )
 pause_mode = 2
 frames = SubResource( 5 )
 animation = "left"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -95,6 +94,7 @@ shape = SubResource( 7 )
 
 [node name="BombArea" type="Area2D" parent="."]
 pause_mode = 1
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BombArea"]
 shape = SubResource( 8 )

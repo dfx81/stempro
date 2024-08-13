@@ -55,6 +55,7 @@ var persist: Array = []
 var time: float = 99
 var time_default: float = 99
 var score: int = 0
+var running: bool = false
 
 func _ready():
 	questions = bio_questions + phys_questions + cs_questions
@@ -69,8 +70,14 @@ func diff_up():
 	if diff > max_diff:
 		diff = max_diff
 
-func reset_diff():
+func reset_game():
 	diff = 0
+	answer_pos = 0
+	cur_question = 0
+	lives = 3
+	persist = []
+	score = 0
+	stage = 1
 
 func get_question() -> Array:
 	var question: Array = questions[cur_question]
