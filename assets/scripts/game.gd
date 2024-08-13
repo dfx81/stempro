@@ -8,6 +8,7 @@ var win: bool = false
 var last_ans_pos: int
 
 func _ready():
+	randomize()
 	last_ans_pos = Globals.answer_pos
 	question = Globals.get_question()
 	update_hint()
