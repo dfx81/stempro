@@ -168,7 +168,7 @@ position = Vector2( 12, 12.4 )
 position = Vector2( 244, 212 )
 
 [node name="Node2D3" type="Node2D" parent="CanvasLayer/ViewportContainer/Viewport/Node2D/level"]
-position = Vector2( 244, 12.4 )
+position = Vector2( 128, 84 )
 
 [node name="Node2D4" type="Node2D" parent="CanvasLayer/ViewportContainer/Viewport/Node2D/level"]
 position = Vector2( 12, 212 )
