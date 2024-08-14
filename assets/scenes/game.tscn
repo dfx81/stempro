@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/scenes/level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/scenes/player.tscn" type="PackedScene" id=2]
@@ -18,6 +18,13 @@
 [ext_resource path="res://assets/audio/phaseJump4.ogg" type="AudioStream" id=16]
 [ext_resource path="res://assets/audio/jingles_NES00.ogg" type="AudioStream" id=17]
 [ext_resource path="res://assets/audio/jingles_NES03.ogg" type="AudioStream" id=18]
+[ext_resource path="res://assets/sprites/shadedLight14.png" type="Texture" id=19]
+[ext_resource path="res://assets/audio/error_006.ogg" type="AudioStream" id=20]
+
+[sub_resource type="DynamicFont" id=1]
+size = 36
+extra_spacing_char = 4
+font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 96
@@ -27,9 +34,8 @@ font_data = ExtResource( 6 )
 size = 36
 font_data = ExtResource( 6 )
 
-[sub_resource type="DynamicFont" id=1]
-size = 36
-extra_spacing_char = 4
+[sub_resource type="DynamicFont" id=4]
+size = 56
 font_data = ExtResource( 6 )
 
 [node name="game" type="Node2D" groups=["game_manager"]]
@@ -44,6 +50,25 @@ layer = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )
+
+[node name="Answer" type="RichTextLabel" parent="CanvasLayer/ColorRect"]
+pause_mode = 2
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -54.0
+margin_bottom = 18.0
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_fonts/mono_font = SubResource( 1 )
+custom_fonts/bold_italics_font = SubResource( 1 )
+custom_fonts/italics_font = SubResource( 1 )
+custom_fonts/bold_font = SubResource( 1 )
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][shake rate=10.0 level=5 connected=0]_____[/shake][/center]"
+text = "_____"
 
 [node name="Question" type="RichTextLabel" parent="CanvasLayer/ColorRect"]
 pause_mode = 2
@@ -92,62 +117,6 @@ bbcode_text = "[center]STAGE 1[/center]"
 text = "STAGE 1"
 scroll_active = false
 
-[node name="Lives" type="RichTextLabel" parent="CanvasLayer/ColorRect"]
-pause_mode = 2
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -224.0
-margin_right = -17.0
-margin_bottom = 93.0
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
-custom_fonts/mono_font = SubResource( 2 )
-custom_fonts/bold_italics_font = SubResource( 2 )
-custom_fonts/italics_font = SubResource( 2 )
-custom_fonts/bold_font = SubResource( 2 )
-custom_fonts/normal_font = SubResource( 2 )
-bbcode_enabled = true
-bbcode_text = "[right]LIVES X3[/right]"
-text = "LIVES X3"
-scroll_active = false
-
-[node name="Score" type="RichTextLabel" parent="CanvasLayer/ColorRect"]
-pause_mode = 2
-margin_left = 16.0
-margin_right = 222.0
-margin_bottom = 93.0
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
-custom_fonts/mono_font = SubResource( 2 )
-custom_fonts/bold_italics_font = SubResource( 2 )
-custom_fonts/italics_font = SubResource( 2 )
-custom_fonts/bold_font = SubResource( 2 )
-custom_fonts/normal_font = SubResource( 2 )
-bbcode_enabled = true
-bbcode_text = "0000000"
-text = "0000000"
-scroll_active = false
-
-[node name="Best" type="RichTextLabel" parent="CanvasLayer/ColorRect"]
-pause_mode = 2
-visible = false
-margin_left = 9.0
-margin_top = 26.0
-margin_right = 1036.0
-margin_bottom = 119.0
-rect_scale = Vector2( 0.3, 0.3 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
-custom_fonts/mono_font = SubResource( 2 )
-custom_fonts/bold_italics_font = SubResource( 2 )
-custom_fonts/italics_font = SubResource( 2 )
-custom_fonts/bold_font = SubResource( 2 )
-custom_fonts/normal_font = SubResource( 2 )
-bbcode_enabled = true
-bbcode_text = "BEST: 0000000"
-text = "BEST: 0000000"
-scroll_active = false
-
 [node name="Hint" type="RichTextLabel" parent="CanvasLayer/ColorRect"]
 pause_mode = 2
 anchor_left = 0.5
@@ -158,25 +127,6 @@ margin_left = -640.0
 margin_top = 306.0
 margin_right = 640.0
 margin_bottom = 358.0
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
-custom_fonts/mono_font = SubResource( 1 )
-custom_fonts/bold_italics_font = SubResource( 1 )
-custom_fonts/italics_font = SubResource( 1 )
-custom_fonts/bold_font = SubResource( 1 )
-custom_fonts/normal_font = SubResource( 1 )
-bbcode_enabled = true
-bbcode_text = "[center][shake rate=10.0 level=5 connected=0]_____[/shake][/center]"
-text = "_____"
-
-[node name="Answer" type="RichTextLabel" parent="CanvasLayer/ColorRect"]
-pause_mode = 2
-visible = false
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -54.0
-margin_bottom = 18.0
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_fonts/mono_font = SubResource( 1 )
@@ -374,6 +324,99 @@ normal = ExtResource( 11 )
 pressed = ExtResource( 12 )
 visibility_mode = 1
 
+[node name="pause-btn" type="TouchScreenButton" parent="CanvasLayer/ViewportContainer/Viewport"]
+position = Vector2( 1080, 270 )
+scale = Vector2( 1.5, 1.5 )
+normal = ExtResource( 19 )
+visibility_mode = 1
+
+[node name="Pause" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -122.5
+margin_top = -128.0
+margin_right = 122.5
+margin_bottom = -56.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "PAUSED"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/Pause"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -108.5
+margin_top = 140.5
+margin_right = 108.5
+margin_bottom = 193.5
+custom_fonts/font = SubResource( 2 )
+text = "CONTINUE"
+flat = true
+
+[node name="Best" type="Label" parent="CanvasLayer/Pause"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -208.0
+margin_right = 208.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 2 )
+text = "HI-SCORE: 0000000"
+align = 1
+valign = 1
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Lives" type="RichTextLabel" parent="CanvasLayer/Control"]
+pause_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -224.0
+margin_right = -17.0
+margin_bottom = 93.0
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/bold_italics_font = SubResource( 2 )
+custom_fonts/italics_font = SubResource( 2 )
+custom_fonts/bold_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[right]LIVES X3[/right]"
+text = "LIVES X3"
+scroll_active = false
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer/Control"]
+pause_mode = 2
+margin_left = 16.0
+margin_right = 222.0
+margin_bottom = 93.0
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
+custom_fonts/mono_font = SubResource( 2 )
+custom_fonts/bold_italics_font = SubResource( 2 )
+custom_fonts/italics_font = SubResource( 2 )
+custom_fonts/bold_font = SubResource( 2 )
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+bbcode_text = "0000000"
+text = "0000000"
+scroll_active = false
+
 [node name="Chasing" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
 stream = ExtResource( 15 )
@@ -390,7 +433,12 @@ stream = ExtResource( 17 )
 pause_mode = 2
 stream = ExtResource( 18 )
 
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+
 [connection signal="pressed" from="CanvasLayer/ViewportContainer/Viewport/up" to="." method="_on_input_pressed" binds= [ 0 ]]
 [connection signal="pressed" from="CanvasLayer/ViewportContainer/Viewport/right" to="." method="_on_input_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="CanvasLayer/ViewportContainer/Viewport/down" to="." method="_on_input_pressed" binds= [ 2 ]]
 [connection signal="pressed" from="CanvasLayer/ViewportContainer/Viewport/left" to="." method="_on_input_pressed" binds= [ 3 ]]
+[connection signal="pressed" from="CanvasLayer/ViewportContainer/Viewport/pause-btn" to="." method="_on_pausebtn_pressed"]
+[connection signal="pressed" from="CanvasLayer/Pause/Button" to="." method="_on_pausebtn_pressed"]

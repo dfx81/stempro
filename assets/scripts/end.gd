@@ -5,6 +5,9 @@ var menu: PackedScene
 func _ready():
 	menu = preload("res://assets/scenes/menu.tscn")
 	$ColorRect/Score.text = "SCORE: " + str(Globals.score).pad_zeros(7)
+	
+	if Globals.bested:
+		$ColorRect/Best.modulate.a = 255
 
 func _input(event):
 	if event is InputEventMouseButton:

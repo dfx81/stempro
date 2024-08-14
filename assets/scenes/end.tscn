@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/Silkscreen-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/Silkscreen-Bold.ttf" type="DynamicFontData" id=2]
@@ -15,6 +15,10 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 24
 font_data = ExtResource( 1 )
 
 [sub_resource type="Animation" id=4]
@@ -55,6 +59,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect/Best:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "summary"
@@ -90,6 +106,18 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ColorRect/Best:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -177,6 +205,21 @@ margin_right = 640.0
 margin_bottom = 54.0
 custom_fonts/font = SubResource( 3 )
 text = "SCORE: 0000000"
+align = 1
+valign = 1
+
+[node name="Best" type="Label" parent="ColorRect"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = 36.0
+margin_right = 640.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 8 )
+text = "* NEW BEST *"
 align = 1
 valign = 1
 

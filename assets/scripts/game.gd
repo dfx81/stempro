@@ -12,12 +12,13 @@ func _ready():
 	last_ans_pos = Globals.answer_pos
 	question = Globals.get_question()
 	update_hint()
+	$CanvasLayer/Control/Score.bbcode_text = str(Globals.score).pad_zeros(7)
 	$CanvasLayer/ColorRect/Stage.bbcode_text = "[center]STAGE " + str(Globals.stage) + "[/center]"
 	$CanvasLayer/ColorRect/Question.bbcode_text = "[center]" + question[0] + "[/center]"
-	$CanvasLayer/ColorRect/Lives.bbcode_text = "[right]LIVES X" + str(Globals.lives) + "[/right]"
+	$CanvasLayer/Control/Lives.bbcode_text = "[right]LIVES X" + str(Globals.lives) + "[/right]"
 	$CanvasLayer/ColorRect/Answer.bbcode_text = "[center][wave amp=50 freq=10]" + Globals.answer + "[/wave][/center]"
 	get_tree().paused = true
-	letter_scene = preload("res://assets/scenes/letter.tscn")
+	letter_scene = load("res://assets/scenes/letter.tscn")
 	
 	spots = get_tree().get_nodes_in_group("letter_spot")
 	spots.shuffle()
@@ -56,7 +57,13 @@ func _process(delta):
 	if Input.is_action_just_released("ui_cancel") and Globals.running:
 		get_tree().paused = not get_tree().paused
 	
-	$CanvasLayer/ColorRect/Score.bbcode_text = str(Globals.score).pad_zeros(7)
+	$CanvasLayer/Control/Score.bbcode_text = str(Globals.score).pad_zeros(7)
+	
+	if Globals.score > Globals.best:
+		Globals.best = Globals.score
+		Globals.bested = true
+	
+	$CanvasLayer/Pause/Best.text = "HI-SCORE: " + str(Globals.best).pad_zeros(7)
 	win = Globals.check_win()
 	
 	if last_ans_pos < Globals.answer_pos and not win:
@@ -72,7 +79,8 @@ func _process(delta):
 		$CanvasLayer/ColorRect/Answer.visible = true
 		$CanvasLayer/ColorRect/Hint.visible = false
 		Globals.score += int(Globals.time)
-		$CanvasLayer/ColorRect/Score.bbcode_text = str(Globals.score).pad_zeros(7)
+		$CanvasLayer/Control/Score.bbcode_text = str(Globals.score).pad_zeros(7)
+		$CanvasLayer/Pause/Best.text = "HI-SCORE: " + str(Globals.best).pad_zeros(7)
 		get_tree().paused = true
 		Globals.answer_pos = 0
 		yield(get_tree().create_timer(3, true), "timeout")
@@ -119,3 +127,13 @@ func play_lose_sound():
 func play_win_sound():
 	$Chasing.stop()
 	$Win.play()
+
+
+func _on_pausebtn_pressed():
+	$click.play()
+	
+	if Globals.running:
+		get_tree().paused = not get_tree().paused
+		$CanvasLayer/Pause.visible = not $CanvasLayer/Pause.visible
+		
+		$CanvasLayer/Pause.mouse_filter = Control.MOUSE_FILTER_STOP if get_tree().paused else Control.MOUSE_FILTER_IGNORE

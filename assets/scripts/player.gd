@@ -11,7 +11,7 @@ var valid: Array = [false, false, false, false]
 var play: bool = false
 
 func _ready():
-	end = preload("res://assets/scenes/end.tscn")
+	end = load("res://assets/scenes/end.tscn")
 	play = true
 	front = get_node(front_path)
 
@@ -72,6 +72,7 @@ func _on_Area2D_body_entered(body):
 		
 		if Globals.lives <= 0:
 			die()
+			Globals.save_score()
 			yield(get_tree().create_timer(3, true), "timeout")
 			get_tree().change_scene_to(end)
 		else:

@@ -1,5 +1,7 @@
 extends Node
 
+var PATH = "user://score.save"
+
 var bio_questions : Array = [
 	["___ of a sperm contains acrosome and nucleus.", "HEAD"],
 	["Head of a sperm contains ___ and nucleus.", "ACROSOME"],
@@ -55,6 +57,8 @@ var persist: Array = []
 var time: float = 99
 var time_default: float = 99
 var score: int = 0
+var best: int = 0
+var bested: bool = false
 var running: bool = false
 
 func _ready():
@@ -78,6 +82,7 @@ func reset_game():
 	persist = []
 	score = 0
 	stage = 1
+	bested = false
 
 func get_question() -> Array:
 	var question: Array = questions[cur_question]
@@ -104,3 +109,20 @@ func check_letter(letter: String) -> bool:
 
 func check_win() -> bool:
 	return answer_pos >= len(answer)
+
+func save_score():
+	var file = File.new()
+	
+	file.open(PATH, File.WRITE)
+	file.store_32(best)
+	
+	file.close()
+	
+func load_score():
+	var file = File.new()
+	var exist = file.file_exists(PATH)
+	
+	if exist:
+		file.open(PATH, File.READ)
+		best = file.get_32()
+		file.close()

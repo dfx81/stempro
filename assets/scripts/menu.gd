@@ -4,7 +4,9 @@ var start: bool
 var game: PackedScene
 
 func _ready():
-	game = preload("res://assets/scenes/game.tscn")
+	game = load("res://assets/scenes/game.tscn")
+	Globals.load_score()
+	$ColorRect/Best.text = "HI-SCORE: " + str(Globals.best).pad_zeros(7)
 	start = false
 
 func _on_Transition_gui_input(event: InputEvent):
